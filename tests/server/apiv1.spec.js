@@ -22,8 +22,9 @@ sinon.spy(resMock, "send");
 
 
 describe('Get Weather', function() {
-
-  it('with without zip code', function() {
+  
+  //
+  it('with without name', function() {
     reqMock = {
       query: {
 
@@ -34,11 +35,12 @@ describe('Get Weather', function() {
 
     assert(resMock.status.lastCall.calledWith(400), 'Unexpected status code:' + resMock.status.lastCall.args);
   });
-
-  it('with valid zip code and error from request call', function() {
+  
+  //
+  it('with valid name and error from request call', function() {
     reqMock = {
       query: {
-        zip: 79968
+        name: 'auckland'
       }
     };
 
@@ -53,11 +55,12 @@ describe('Get Weather', function() {
     assert(resMock.status.lastCall.calledWith(400), 'Unexpected response:' + resMock.status.lastCall.args);
     assert(resMock.send.lastCall.calledWith('Failed to get the data'), 'Unexpected response:' + resMock.send.lastCall.args);
   });
-
-  it('with incomplete zip code', function() {
+  
+  //
+  it('with incomplete name', function() {
     reqMock = {
       query: {
-        zip: 79968
+        name: 'aucklan'
       }
     };
 
@@ -72,17 +75,18 @@ describe('Get Weather', function() {
     assert(resMock.status.lastCall.calledWith(400), 'Unexpected response:' + resMock.status.lastCall.args);
     assert(resMock.send.lastCall.args[0].msg === 'Failed', 'Unexpected response:' + resMock.send.lastCall.args);
   });
-
-  it('with valid zip code', function() {
+  
+  //
+  it('with valid city name', function() {
     reqMock = {
       query: {
-        zip: 79968
+        name: 'auckland'
       }
     };
 
     const body = {
       cod: 200,
-      name: 'El Paso',
+      name: 'auckland',
       weather: [
         {
           main: 'cold'
@@ -102,7 +106,7 @@ describe('Get Weather', function() {
     apiv1.getWeather(reqMock, resMock);
 
     assert(resMock.status.lastCall.calledWith(200), 'Unexpected response:' + resMock.status.lastCall.args);
-    assert(resMock.send.lastCall.args[0].city === 'El Paso', 'Unexpected response:' + resMock.send.lastCall.args[0].city);
+    assert(resMock.send.lastCall.args[0].city === 'auckland', 'Unexpected response:' + resMock.send.lastCall.args[0].city);
     assert(resMock.send.lastCall.args[0].weather === 'Conditions are cold and temperature is 78 F', 'Unexpected response:' + resMock.send.lastCall.args[0].weather);
   });
 });
