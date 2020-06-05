@@ -28,7 +28,7 @@ function map(props) {
         return (
             <div className="col-sm-8">
                 <div className="text-danger">"it worked"</div>
-                <div className="text-danger">{prop.responseGData.features.0.center}</div>
+                <div className="text-danger">{prop.responseGData.features[0].center}</div>
             </div>
         )
     }
