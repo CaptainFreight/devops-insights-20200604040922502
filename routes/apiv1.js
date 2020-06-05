@@ -15,7 +15,7 @@ exports.getWeather = function(req, res) {
 		return res.status(400).send('name missing');
 	}
 
-	var aurl = OPENWEATHERURL + '&q=' + name + ',nz';
+	var aurl = OPENWEATHERURL + '&q=' + name + ',NZ';
 
 	request({
 		method: 'GET',
@@ -76,7 +76,7 @@ exports.getWeather3 = function(req, res) {
 		return res.status(400).send('name missing');
 	}
 
-	var aurl = OPENWEATHERURL + '&q=' + zip + ',nz';
+	var aurl = OPENWEATHERURL + '&q=' + zip + ',NZ';
 
 	request({
 		method: 'GET',
